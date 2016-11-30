@@ -9,3 +9,8 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 .idea/
+out/
+repl/
+resources/public/main.js
+*.swp
+*.iml
