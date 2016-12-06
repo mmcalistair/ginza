@@ -1,0 +1,47 @@
+#header{
+    background-color: #3C84A7;
+    height: 100px;
+    width: 70%;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+
+}
+p.green{
+    font-family: 'Inconsolata', monospace;
+    color: green;
+}
+
+p.red{
+    font-family: 'Inconsolata', monospace;
+    color: red;
+}
+
+h1{
+    font-family: 'Inconsolata', monospace;
+    color: white;
+    font-size: 500%;
+}
+
+#spacer{
+    background-color: #000000;
+    height: 1px;
+    width: 70%;
+
+    margin: auto;
+}
+
+#mainwrapper{
+    background-color: #FFFFFF;
+    width: 100%;
+    align-content: center;
+    height: 100%;
+    margin: auto;
+}
+
+#main{
+    width: 600px;
+    background-color: #BDE0F1;
+    height: 100%;
+    margin: auto;
+}

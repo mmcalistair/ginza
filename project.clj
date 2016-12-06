@@ -9,7 +9,8 @@
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/clojurescript "1.9.293"]
                  [enfocus "2.1.1"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [clj-http "2.3.0"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cljsbuild "1.1.4"]]
   :ring {:handler ginza.handler/app}
