@@ -1,0 +1,5 @@
+{
+  "app_id": "",
+  "app_secret": ""
+  "redirect_url": "http://localhost:3000/oauth"
+}
