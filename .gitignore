@@ -14,3 +14,4 @@ repl/
 resources/public/main.js
 *.swp
 *.iml
+config.json
