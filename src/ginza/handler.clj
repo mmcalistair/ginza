@@ -35,7 +35,7 @@
       (oauth/request-access-token (:code (:params request)))
       "No valid code returned"))
 
-  (GET "/test" []
+  (GET "/test.xml" []
     (office365/api-get-contacts))
   (GET "/test2.xml" []
            {:status 200

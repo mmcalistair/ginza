@@ -15,6 +15,12 @@
        "&"
        "client_id=" (:app_id oauth-config)))
 
+(defn refresh-token [body]
+  (println "Start thread")
+  (Thread/sleep 10000)
+  (println "WAKE UP")
+  (client/post))
+
 (defn request-access-token [authorize-code]
   (println "TEST")
   (let [res (client/post "https://login.microsoftonline.com/common/oauth2/token"
@@ -30,6 +36,8 @@
          (let [body (json/read-json (:body res) true)]
            (println body)
            (state/set-token body)
+           (future (refresh-token body))
            (state/set-status-connected))))
   (ring.util.response/redirect "/"))
+
 

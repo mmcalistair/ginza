@@ -31,3 +31,7 @@
 
 (defn get-token []
   @token)
+
+(defn rammstein? []
+  "This is just a test"
+  (println "RAMMSTEIN"))
