@@ -6,6 +6,7 @@
             [victoria.core :as victoria]))
 
 (def oauth-config (victoria/load-configuration "config.json"))
+(def refresh-actice (atom :not-running))
 
 (def req-token-link
   (str "https://login.microsoftonline.com/common/oauth2/authorize?"
@@ -17,9 +18,22 @@
 
 (defn refresh-token [body]
   (println "Start thread")
-  (Thread/sleep 10000)
-  (println "WAKE UP")
-  (client/post))
+  (let [res body
+        expires (:expires_in res)
+        sleepTime (- (Integer. expires) 30)]
+    (println (str "Sleep for " sleepTime))
+    (Thread/sleep (* sleepTime 1000))
+    (println "WAKE UP")
+    (let [nres (client/post "https://login.microsoftonline.com/common/oauth2/token"
+                 {:form-params
+                    {:grant_type "refresh_token"
+                     :refresh_token (:refresh_token body)
+                     :client_id (:app_id oauth-config)
+                     :client_secret (:app_secret oauth-config)}})]
+      (println (str "new res" nres))
+      (state/set-token (json/read-json (:body nres) true))
+      (refresh-token (json/read-json (:body nres) true)))))
+
 
 (defn request-access-token [authorize-code]
   (println "TEST")
