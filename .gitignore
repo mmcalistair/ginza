@@ -16,3 +16,4 @@ resources/public/main.js
 *.iml
 .DS_Store
 config.json
+node_modules/
