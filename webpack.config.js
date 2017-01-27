@@ -1,8 +1,8 @@
 module.exports = {
-    entry: './src/index.js',
+    entry: './webdev/src/index.js',
     output: {
     filename: 'bundle.js',
-    path: '../public/js'
+    path: 'resources/public/js'
 },
 module: {
     loaders: [
