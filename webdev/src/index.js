@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import MainView from './MainView'
+
 ReactDOM.render(
-      <h1>Hello, world!</h1>,
+      <MainView />,
       document.getElementById('root')
 );
