@@ -100,3 +100,17 @@
              :headers {"Content-Type" "text/xml;charset=UTF-8"}
              :body (str parsed)}))))))
 
+(defn api-get-contacts-json []
+  (println (:access_token (state/get-token)))
+  (let [res (client/get "https://graph.microsoft.com/v1.0/me/contacts"
+                        {:headers
+                         {:Authorization (:access_token (state/get-token))
+                          :Content-Type "application/json"}})]
+    (println (str (:body res)))
+    (let [data (:value (json/read-json (:body res) true))]
+      (let [parsed (parse-res data)]
+        (let [parsed (reformat-phone-numbers parsed)]
+          parsed)))))
+
+
+
