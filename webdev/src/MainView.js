@@ -1,6 +1,61 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+class ContactItem extends React.Component{
+	constructor(props){
+ 		super(props);           
+	}
+
+	render(){
+		const name = this.props.data.name;
+		const phoneList = this.props.data.phones.map((item, index) => {return <td key={item + '_' + index}>{item}</td>});
+		return(
+			<tr>
+				<td>
+					{name}
+				</td>
+				{phoneList}
+			</tr>
+		);
+	}
+
+	componentWillMount(){
+
+	}
+}
+
+class ContactTable extends React.Component{
+	constructor(props){
+ 		super(props);           
+	}
+
+	render(){
+		const contactList = this.props.contactData;
+		let itemList = contactList.map((item) => {return <ContactItem data={item} key={item.name}/>});
+		return (
+			<table className="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Phone 1</th>
+						<th>Phone 2</th>
+						<th>Phone 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					{itemList}
+				</tbody>
+			</table>
+		);
+		
+	}
+
+	componentWillMount(){
+
+	}
+}
+
+
 class ContentView extends React.Component{
 	constructor(props){
  		super(props);           
@@ -13,8 +68,7 @@ class ContentView extends React.Component{
 		}else if(this.props.connected && this.props.contactData == null){
 			return <p>No Data present</p>;
 		}else if(this.props.connected && this.props.contactData != null){
-			console.log(this.props.contactData);
-			return <p>Contact length: {this.props.contactData.length}</p>;
+			return <ContactTable connected={this.props.connected} contactData={this.props.contactData} />;
 		}
 	}
 
