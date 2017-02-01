@@ -4,12 +4,18 @@ import ReactDOM from 'react-dom';
 class ContentView extends React.Component{
 	constructor(props){
  		super(props);           
+
 	}
 
 	render(){
-		return(
-			<p>Content</p>
-		)
+		if(!this.props.connected){
+			return <p>Status: {this.props.connected}</p>;
+		}else if(this.props.connected && this.props.contactData == null){
+			return <p>No Data present</p>;
+		}else if(this.props.connected && this.props.contactData != null){
+			console.log(this.props.contactData);
+			return <p>Contact length: {this.props.contactData.length}</p>;
+		}
 	}
 
 	componentWillMount(){
@@ -64,11 +70,13 @@ export default class MainView extends React.Component{
  		
  		this.state = {
  			connected: false,
- 			authLink : null
+ 			authLink : null,
+ 			contactData: null
  		};           
 
  		this.handleAuthLinkRecieved = this.handleAuthLinkRecieved.bind(this);
  		this.handleConnectionStatusRecieved = this.handleConnectionStatusRecieved.bind(this);
+ 		this.handleContactData = this.handleContactData.bind(this);
 	}
 
 	render(){
@@ -82,7 +90,8 @@ export default class MainView extends React.Component{
 				</div>
 				<div className="row">	
 					<div className="col-lg-12 col-md-12"></div>
-					<ContentView connected={this.state.connected}/>
+					<ContentView 	connected={this.state.connected}
+									contactData={this.state.contactData} />
 				</div>
 			</div>
 		)
@@ -91,8 +100,21 @@ export default class MainView extends React.Component{
 		this.setState({authLink: res.link});
 	}
 
+	handleContactData(res){
+		console.log('Got contact data');
+		this.setState({
+			contactData: res.data
+		});
+	}
+
+	requestContactData(){
+		console.log("Request contact data");
+		$.ajax('api/contacts').done((res) => {this.handleContactData(res)});
+	}
+
 	handleConnectionStatusRecieved(res){
-		this.setState({connected: res.connected})
+		this.setState({connected: res.connected});
+		this.requestContactData();
 	}
 	componentWillMount(){
 		$.ajax('api/status').done((res) => {this.handleConnectionStatusRecieved(res)});
