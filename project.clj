@@ -13,7 +13,7 @@
                  [clj-http "2.3.0"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cljsbuild "1.1.4"]]
-  :ring {:handler ginza.handler/app}
+  :ring {:handler ginza.handler/app :open-browser? false}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}}
